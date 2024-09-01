@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <input_file>"
+    exit 1
+fi
+
+input_file=$1
+output_file="expanded.c"
+
+# Clean the output file if it already exists
+echo -n > $output_file
+
+# Compile and run the preprocessor
+gcc -o preprocessor main.c preprocessor.c
+./preprocessor $input_file
+
+echo "Generated $output_file"
